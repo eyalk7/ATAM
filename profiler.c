@@ -364,67 +364,67 @@ int main (int argc, char* argv[]) {
 	char reg[BUF_SIZE];		
 	scanf("%s%s", var, reg);
 	while (strcmp(var,"run") != 0 && strcmp(reg,"profile") != 0) {
-		if (is_rax) {
+		if (is_rax(reg)) {
 		    strcpy(var_names[RAX], var);
 		    need_to_check_regs[RAX] = true;
 		}
-		else if (is_rbx) {
+		else if (is_rbx(reg)) {
 	        strcpy(var_names[RBX], var);
             need_to_check_regs[RBX] = true;
 		}
-		else if (is_rcx) {
+		else if (is_rcx(reg)) {
             strcpy(var_names[RCX], var);
             need_to_check_regs[RCX] = true;
 		}
-		else if (is_rdx) {
+		else if (is_rdx(reg)) {
             strcpy(var_names[RDX], var);
             need_to_check_regs[RDX] = true;
 		}
-		else if (is_rsi) {
+		else if (is_rsi(reg)) {
 		    strcpy(var_names[RSI], var);
 		    need_to_check_regs[RSI] = true;
 		}
-		else if (is_rdi) {
+		else if (is_rdi(reg)) {
 		    strcpy(var_names[RDI], var);
 		    need_to_check_regs[RDI] = true;
 		}
-		else if (is_rbp) {
+		else if (is_rbp(reg)) {
 		    strcpy(var_names[RBP], var);
 		    need_to_check_regs[RBP] = true;
 		}
-		else if (is_rsp) {
+		else if (is_rsp(reg)) {
 		    strcpy(var_names[RSP], var);
 		    need_to_check_regs[RSP] = true;
 		}
-		else if (is_r8) {
+		else if (is_r8(reg)) {
 		    strcpy(var_names[R8], var);
 		    need_to_check_regs[R8] = true;
 		}
-		else if (is_r9) {
+		else if (is_r9(reg)) {
 		    strcpy(var_names[R9], var);
 		    need_to_check_regs[R9] = true;
 		}
-		else if (is_r10) {
+		else if (is_r10(reg)) {
 		    strcpy(var_names[R10], var);
 		    need_to_check_regs[R10] = true;
 		}
-		else if (is_r11) {
+		else if (is_r11(reg)) {
 		    strcpy(var_names[R11], var);
 		    need_to_check_regs[R11] = true;
 		}
-		else if (is_r12) {
+		else if (is_r12(reg)) {
 		    strcpy(var_names[R12], var);
 		    need_to_check_regs[R12] = true;
 		}
-		else if (is_r13) {
+		else if (is_r13(reg)) {
 		    strcpy(var_names[R13], var);
 		    need_to_check_regs[R13] = true;
 		}
-		else if (is_r14) {
+		else if (is_r14(reg)) {
 		    strcpy(var_names[R14], var);
 		    need_to_check_regs[R14] = true;
 		}
-		else if (is_r15) {
+		else if (is_r15(reg)) {
 		    strcpy(var_names[R15], var);
 		    need_to_check_regs[R15] = true;
 		}
