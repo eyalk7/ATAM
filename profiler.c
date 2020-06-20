@@ -38,112 +38,112 @@ char toPrint[NUM_REGS][BUF_SIZE];
 /*---------------------CHECK REGS------------------------*/
 
 bool is_rax(char reg[]) {
-    if (strcmp(reg,"rax") || strcmp(reg,"eax") || strcmp(reg,"ax") || strcmp(reg,"al") || strcmp(reg,"ah")) {
+    if (strcmp(reg,"rax") == 0 || strcmp(reg,"eax") == 0 || strcmp(reg,"ax") == 0 || strcmp(reg,"al") == 0 || strcmp(reg,"ah") == 0) {
         return true;
     }
     return false;
 }
 
 bool is_rbx(char reg[]) {
-    if (strcmp(reg,"rbx") || strcmp(reg,"ebx") || strcmp(reg,"bx") || strcmp(reg,"bl") || strcmp(reg,"bh")) {
+    if (strcmp(reg,"rbx") == 0 || strcmp(reg,"ebx") == 0 || strcmp(reg,"bx") == 0 || strcmp(reg,"bl") == 0  || strcmp(reg,"bh") == 0) {
         return true;
     }
     return false;
 }
 
 bool is_rcx(char reg[]) {
-    if (strcmp(reg,"rcx") || strcmp(reg,"ecx") || strcmp(reg,"cx") || strcmp(reg,"cl") || strcmp(reg,"ch")) {
+    if (strcmp(reg,"rcx") == 0 || strcmp(reg,"ecx") == 0 || strcmp(reg,"cx") == 0 || strcmp(reg,"cl") == 0 || strcmp(reg,"ch") == 0) {
         return true;
     }
     return false;
 }
 
 bool is_rdx(char reg[]) {
-    if (strcmp(reg,"rdx") || strcmp(reg,"edx") || strcmp(reg,"dx") || strcmp(reg,"dl") || strcmp(reg,"dh")) {
+    if (strcmp(reg,"rdx") == 0 || strcmp(reg,"edx") == 0 || strcmp(reg,"dx") == 0 || strcmp(reg,"dl") == 0 || strcmp(reg,"dh") == 0) {
         return true;
     }
     return false;
 }
 
 bool is_rsi(char reg[]) {
-    if (strcmp(reg,"rsi") || strcmp(reg,"esi") || strcmp(reg,"si") || strcmp(reg,"sil")) {
+    if (strcmp(reg,"rsi") == 0 || strcmp(reg,"esi") == 0 || strcmp(reg,"si") == 0 || strcmp(reg,"sil") == 0) {
         return true;
     }
     return false;
 }
 
 bool is_rdi(char reg[]) {
-    if (strcmp(reg,"rdi") || strcmp(reg,"edi") || strcmp(reg,"di") || strcmp(reg,"dil")) {
+    if (strcmp(reg,"rdi") == 0 || strcmp(reg,"edi") == 0 || strcmp(reg,"di") == 0 || strcmp(reg,"dil") == 0) {
         return true;
     }
     return false;
 }
 
 bool is_rbp(char reg[]) {
-    if (strcmp(reg,"rbp") || strcmp(reg,"ebp") || strcmp(reg,"bp") || strcmp(reg,"bpl")) {
+    if (strcmp(reg,"rbp") == 0 || strcmp(reg,"ebp") == 0 || strcmp(reg,"bp") == 0 || strcmp(reg,"bpl") == 0) {
         return true;
     }
     return false;
 }
 
 bool is_rsp(char reg[]) {
-    if (strcmp(reg,"rsp") || strcmp(reg,"esp") || strcmp(reg,"sp") || strcmp(reg,"spl")) {
+    if (strcmp(reg,"rsp") == 0 || strcmp(reg,"esp") == 0 || strcmp(reg,"sp") == 0 || strcmp(reg,"spl") == 0) {
         return true;
     }
     return false;
 }
 
 bool is_r8(char reg[]) {
-    if (strcmp(reg,"r8") || strcmp(reg,"r8d") || strcmp(reg,"r8b") || strcmp(reg,"r8w")) {
+    if (strcmp(reg,"r8") == 0 || strcmp(reg,"r8d") == 0 || strcmp(reg,"r8b") == 0 || strcmp(reg,"r8w") == 0) {
         return true;
     }
     return false;
 }
 
 bool is_r9(char reg[]) {
-    if (strcmp(reg,"r9") || strcmp(reg,"r9d") || strcmp(reg,"r9b") || strcmp(reg,"r9w")) {
+    if (strcmp(reg,"r9") == 0 || strcmp(reg,"r9d") == 0 || strcmp(reg,"r9b") == 0 || strcmp(reg,"r9w") == 0) {
         return true;
     }
     return false;
 }
 
 bool is_r10(char reg[]) {
-    if (strcmp(reg,"r10") || strcmp(reg,"r10d") || strcmp(reg,"r10b") || strcmp(reg,"r10w")) {
+    if (strcmp(reg,"r10") == 0 || strcmp(reg,"r10d") == 0 || strcmp(reg,"r10b") == 0 || strcmp(reg,"r10w") == 0) {
         return true;
     }
     return false;
 }
 
 bool is_r11(char reg[]) {
-    if (strcmp(reg,"r11") || strcmp(reg,"r11d") || strcmp(reg,"r11b") || strcmp(reg,"r11w")) {
+    if (strcmp(reg,"r11") == 0 || strcmp(reg,"r11d") == 0 || strcmp(reg,"r11b") == 0 || strcmp(reg,"r11w") == 0) {
         return true;
     }
     return false;
 }
 
 bool is_r12(char reg[]) {
-    if (strcmp(reg,"r12") || strcmp(reg,"r12d") || strcmp(reg,"r12b") || strcmp(reg,"r12w")) {
+    if (strcmp(reg,"r12") == 0 || strcmp(reg,"r12d") == 0 || strcmp(reg,"r12b") == 0 || strcmp(reg,"r12w") == 0) {
         return true;
     }
     return false;
 }
 
 bool is_r13(char reg[]) {
-    if (strcmp(reg,"r13") || strcmp(reg,"r13d") || strcmp(reg,"r13b") || strcmp(reg,"r13w")) {
+    if (strcmp(reg,"r13") == 0 || strcmp(reg,"r13d") == 0 || strcmp(reg,"r13b") == 0 || strcmp(reg,"r13w") == 0) {
         return true;
     }
     return false;
 }
 
 bool is_r14(char reg[]) {
-    if (strcmp(reg,"r14") || strcmp(reg,"r14d") || strcmp(reg,"r14b") || strcmp(reg,"r14w")) {
+    if (strcmp(reg,"r14") == 0 || strcmp(reg,"r14d") == 0 || strcmp(reg,"r14b") == 0 || strcmp(reg,"r14w") == 0) {
         return true;
     }
     return false;
 }
 
 bool is_r15(char reg[]) {
-    if (strcmp(reg,"r15") || strcmp(reg,"r15d") || strcmp(reg,"r15b") || strcmp(reg,"r15w")) {
+    if (strcmp(reg,"r15") == 0 || strcmp(reg,"r15d") == 0 || strcmp(reg,"r15b") == 0 || strcmp(reg,"r15w") == 0) {
         return true;
     }
     return false;
@@ -338,7 +338,7 @@ void check_changes(struct user_regs_struct regs_before, struct user_regs_struct 
     while(swapped > 0) {
         swapped=0;
         for (int i=1; i<counter; i++) {
-            if (strcmp(toPrint[i-1], toPrint[i])>0) {
+            if (strcmp(toPrint[i-1], toPrint[i]) > 0) {
                 char temp[BUF_SIZE];
                 strcpy(temp, toPrint[i]);
                 strcpy(toPrint[i], toPrint[i-1]);
@@ -363,7 +363,7 @@ int main (int argc, char* argv[]) {
 	char var[BUF_SIZE];
 	char reg[BUF_SIZE];		
 	scanf("%s%s", var, reg);
-	while (strcmp(var,"run")!=0 && strcmp(reg,"profile")!=0) {
+	while (strcmp(var,"run") != 0 && strcmp(reg,"profile") != 0) {
 		if (is_rax) {
 		    strcpy(var_names[RAX], var);
 		    need_to_check_regs[RAX] = true;
