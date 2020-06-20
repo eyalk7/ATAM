@@ -9,6 +9,8 @@
 # include <stdbool.h>
 # include <assert.h>
 
+/*---------------------GLOBALS------------------------*/
+
 # define BUF_SIZE 256
 # define NUM_REGS 16
 # define RAX 0
@@ -29,12 +31,11 @@
 # define R15 15
 
 bool need_to_check_regs[NUM_REGS];
-
 char var_names[NUM_REGS][BUF_SIZE];
-
 char toPrint[NUM_REGS][BUF_SIZE];
 
-// -------------------- //
+
+/*---------------------CHECK REGS------------------------*/
 
 bool is_rax(char reg[]) {
     if (strcmp(reg,"rax") || strcmp(reg,"eax") || strcmp(reg,"ax") || strcmp(reg,"al") || strcmp(reg,"ah")) {
@@ -148,9 +149,13 @@ bool is_r15(char reg[]) {
     return false;
 }
 
-void check_changes(struct user_regs_struct regs_before,struct user_regs_struct regs_after) {
-    int counter =0;
+/*------------------AUX FUNCTIONS------------------------*/
+
+void check_changes(struct user_regs_struct regs_before, struct user_regs_struct regs_after) {
+    int counter = 0;
     char tempBuf[BUF_SIZE];
+
+    // check changes
     if (need_to_check_regs[RAX] && regs_before.rax != regs_after.rax) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[RAX]);
@@ -328,8 +333,9 @@ void check_changes(struct user_regs_struct regs_before,struct user_regs_struct r
         counter++;
     }
 
+    // sort
     int swapped=1;
-    while(swapped>0) {
+    while(swapped > 0) {
         swapped=0;
         for (int i=1; i<counter; i++) {
             if (strcmp(toPrint[i-1], toPrint[i])>0) {
@@ -341,145 +347,156 @@ void check_changes(struct user_regs_struct regs_before,struct user_regs_struct r
             }
         }
     }
+
+    // print
     for (int j=0; j<counter; j++) {
         printf("%s\n", toPrint[j]);
     }
 }
 
 int main (int argc, char* argv[]) {
-	unsigned long start_addr = strtol(argv[1], NULL, 16);	
+	unsigned long start_addr = strtol(argv[1], NULL, 16);
 	unsigned long end_addr = strtol(argv[2], NULL, 16);
-	for (int i=0; i<NUM_REGS; i++) {
-		need_to_check_regs[i] = false;
-	}
+	for (int i=0; i<NUM_REGS; i++) need_to_check_regs[i] = false;
 
+	// get vars from user
 	char var[BUF_SIZE];
 	char reg[BUF_SIZE];		
 	scanf("%s%s", var, reg);
 	while (strcmp(var,"run")!=0 && strcmp(reg,"profile")!=0) {
 		if (is_rax) {
-		        strcpy(var_names[RAX], var);
-		        need_to_check_regs[RAX] = true;
-	    	}
+		    strcpy(var_names[RAX], var);
+		    need_to_check_regs[RAX] = true;
+		}
 		else if (is_rbx) {
-	        	strcpy(var_names[RBX], var);
-            		need_to_check_regs[RBX] = true;
-	    	}
-        	else if (is_rcx) {
-            		strcpy(var_names[RCX], var);
-            		need_to_check_regs[RCX] = true;
-        	}
-        	else if (is_rdx) {
-            		strcpy(var_names[RDX], var);
-            		need_to_check_regs[RDX] = true;
-        	}
-        	else if (is_rsi) {
-            		strcpy(var_names[RSI], var);
-            		need_to_check_regs[RSI] = true;
-        	}
-        	else if (is_rdi) {
-            		strcpy(var_names[RDI], var);
-            		need_to_check_regs[RDI] = true;
-        	}
-        	else if (is_rbp) {
-            		strcpy(var_names[RBP], var);
-        	    	need_to_check_regs[RBP] = true;
-        	}
-        	else if (is_rsp) {
-            		strcpy(var_names[RSP], var);
-            		need_to_check_regs[RSP] = true;
-        	}
-        	else if (is_r8) {
-            		strcpy(var_names[R8], var);
-            		need_to_check_regs[R8] = true;
-        	}
-        	else if (is_r9) {
-            		strcpy(var_names[R9], var);
-            		need_to_check_regs[R9] = true;
-        	}
-        	else if (is_r10) {
-            		strcpy(var_names[R10], var);
-            		need_to_check_regs[R10] = true;
-        	}
-        	else if (is_r11) {
-            		strcpy(var_names[R11], var);
-            		need_to_check_regs[R11] = true;
-        	}
-        	else if (is_r12) {
-            		strcpy(var_names[R12], var);
-            		need_to_check_regs[R12] = true;
-        	}	
-        	else if (is_r13) {
-            		strcpy(var_names[R13], var);
-            		need_to_check_regs[R13] = true;
-        	}
-        	else if (is_r14) {
-            		strcpy(var_names[R14], var);
-            		need_to_check_regs[R14] = true;
-	        }
-        	else if (is_r15) {
-            		strcpy(var_names[R15], var);
-            		need_to_check_regs[R15] = true;
-	        }
-
-        	else {
-            		assert(true);
-	        }
+	        strcpy(var_names[RBX], var);
+            need_to_check_regs[RBX] = true;
+		}
+		else if (is_rcx) {
+            strcpy(var_names[RCX], var);
+            need_to_check_regs[RCX] = true;
+		}
+		else if (is_rdx) {
+            strcpy(var_names[RDX], var);
+            need_to_check_regs[RDX] = true;
+		}
+		else if (is_rsi) {
+		    strcpy(var_names[RSI], var);
+		    need_to_check_regs[RSI] = true;
+		}
+		else if (is_rdi) {
+		    strcpy(var_names[RDI], var);
+		    need_to_check_regs[RDI] = true;
+		}
+		else if (is_rbp) {
+		    strcpy(var_names[RBP], var);
+		    need_to_check_regs[RBP] = true;
+		}
+		else if (is_rsp) {
+		    strcpy(var_names[RSP], var);
+		    need_to_check_regs[RSP] = true;
+		}
+		else if (is_r8) {
+		    strcpy(var_names[R8], var);
+		    need_to_check_regs[R8] = true;
+		}
+		else if (is_r9) {
+		    strcpy(var_names[R9], var);
+		    need_to_check_regs[R9] = true;
+		}
+		else if (is_r10) {
+		    strcpy(var_names[R10], var);
+		    need_to_check_regs[R10] = true;
+		}
+		else if (is_r11) {
+		    strcpy(var_names[R11], var);
+		    need_to_check_regs[R11] = true;
+		}
+		else if (is_r12) {
+		    strcpy(var_names[R12], var);
+		    need_to_check_regs[R12] = true;
+		}
+		else if (is_r13) {
+		    strcpy(var_names[R13], var);
+		    need_to_check_regs[R13] = true;
+		}
+		else if (is_r14) {
+		    strcpy(var_names[R14], var);
+		    need_to_check_regs[R14] = true;
+		}
+		else if (is_r15) {
+		    strcpy(var_names[R15], var);
+		    need_to_check_regs[R15] = true;
+		}
+		else {
+		    assert(false); // not supposed to get here
+		}
 	
-		scanf("%s%s", var, reg);
+		scanf("%s%s", var, reg); // get next strings
 	}
 
+	// debug
 	pid_t child_pid;
 	child_pid = fork();
+
 	if (child_pid < 0) {
 	    perror("fork");
 	    exit(1);
 	}
-	else if (child_pid == 0) {
+
+	else if (child_pid == 0) { // child
 	    if(ptrace(PTRACE_TRACEME, 0, NULL, NULL)<0) {
 	        perror("ptrace_traceme");
 	        exit(1);
-	    }	
+	    }
+
 	    execv(argv[3], &argv[4]);
-	    perror("execv");
+
+	    perror("execv"); // not supposed to get here
 	    exit(1);
 	}
+
 	else { // parent process        
-	int wait_status;
+	    int wait_status;
         struct user_regs_struct regs_before , regs_after;
 
+        // wait for child to stop after execv
         if (wait(&wait_status)<0) {
             perror("first wait");
             exit(1);
         }
 
+        // set first breakpoint
         long data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)start_addr, NULL);
         if (data<0) {
             perror("first peektext");
             exit(1);
         }
-
         unsigned long data_trap =(data & 0xFFFFFFFFFFFFFF00)|0xCC;
         if(ptrace(PTRACE_POKETEXT, child_pid, (void*)start_addr, (void*)data_trap)<0) {
             perror("first poketext");
             exit(1);
         }
 
+        // continue
         if(ptrace(PTRACE_CONT, child_pid, NULL, NULL)<0) {
             perror ("first cont");
             exit(1);
         }
 
+        // wait for child to reach the first breakpoint
         if (wait(&wait_status)<0) {
             perror("first wait");
             exit(1);
         }
 
+        // get regs at the first breakpoint
         if(ptrace(PTRACE_GETREGS, child_pid, 0, &regs_before)<0) {
             perror("first getregs");
             exit(1);
         }
 
+        // remove first breakpoint
         if(ptrace(PTRACE_POKETEXT, child_pid, (void*)start_addr, (void*)data)<0) {
             perror("poketext before removing first breakpoint");
             exit(1);
@@ -490,33 +507,37 @@ int main (int argc, char* argv[]) {
             exit(1);
         }
 
+        // set second breakpoint
         data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)end_addr, NULL);
         if (data<0) {
             perror("second peektext");
             exit(1);
         }
-
         data_trap = (data & 0xFFFFFFFFFFFFFF00)|0xCC;
         if(ptrace(PTRACE_POKETEXT, child_pid, (void*)end_addr, (void*)data_trap)<0) {
             perror("second poketext");
             exit(1);
         }
 
+        // continue
         if(ptrace(PTRACE_CONT, child_pid, NULL, NULL)<0) {
             perror ("second cont");
             exit(1);
         }
 
+        // wait for child to reach second breakpoint
         if (wait(&wait_status)<0) {
             perror("second wait");
             exit(1);
         }
 
+        // get regs after second breakpoint
         if(ptrace(PTRACE_GETREGS, child_pid, 0, &regs_after)<0) {
             perror("second getregs");
             exit(1);
         }
 
+        // remove second breakpoint
         if(ptrace(PTRACE_POKETEXT, child_pid, (void*)end_addr, (void*)data)<0) {
             perror("poketext before removing second breakpoint");
             exit(1);
@@ -527,22 +548,23 @@ int main (int argc, char* argv[]) {
             exit(1);
         }
 
+        // continue
         if(ptrace(PTRACE_CONT, child_pid, 0, 0)<0) {
             perror("last cont");
             exit(1);
         }
 
+        // wait for child to finish
         if (wait(&wait_status)<0) {
             perror("last wait");
             exit(1);
         }
-
         if(WIFEXITED(wait_status)) {
             // child exited properly		
-		check_changes(regs_before, regs_after);
+		    check_changes(regs_before, regs_after);
         }
         else {          
-		assert(true); //should not get here
+		    assert(false); //should not get here
         }
 	}
 }
