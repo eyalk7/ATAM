@@ -11,7 +11,7 @@
 
 /*---------------------GLOBALS------------------------*/
 
-# define BUF_SIZE 256
+# define BUF_SIZE 512
 # define NUM_REGS 16
 # define RAX 0
 # define RBX 1
