@@ -81,8 +81,7 @@ class Cluster {
 		}
 		int[] result = Cluster.collectClusters(sequence);
 		for (int i=0; i<result.length; i++) {
-			System.out.print(result[i] + " ");
+			System.out.print(result[i] + " " + "\n");
 		}
-		System.out.print("\n");
 	}
 }
