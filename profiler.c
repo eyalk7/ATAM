@@ -561,12 +561,12 @@ int main (int argc, char* argv[]) {
 			check_changes(regs_before, regs_after);
 		
 			// set first breakpoint again
-			long data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)start_addr, NULL);
+			data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)start_addr, NULL);
 			if (data == (-1) && errno != 0) {
 		    		perror("third peektext");
 		    		exit(1);
 			}
-			unsigned long data_trap =(data & 0xFFFFFFFFFFFFFF00)|0xCC;
+			data_trap =(data & 0xFFFFFFFFFFFFFF00)|0xCC;
 			if(ptrace(PTRACE_POKETEXT, child_pid, (void*)start_addr, (void*)data_trap) == (-1) && errno != 0) {
 		    		perror("third poketext");
 		    		exit(1);
