@@ -462,7 +462,7 @@ int main (int argc, char* argv[]) {
 
         	// wait for child to stop after execv
         	if (wait(&wait_status)<0) {
-            		perror("first wait");
+            		perror("wait after execv");
             		exit(1);
         	}
 		
@@ -483,6 +483,12 @@ int main (int argc, char* argv[]) {
 	    		perror ("first cont");
 	    		exit(1);
 		}
+		
+		// wait for child to reach first breakpoint
+        	if (wait(&wait_status)<0) {
+            		perror("first wait");
+            		exit(1);
+        	}
 	
 		while (!WIFEXITED(wait_status)) { // while child didn't finished
 			// REACHED FIRST BREAKPOINT
