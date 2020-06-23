@@ -8,6 +8,7 @@
 # include <string.h>
 # include <stdbool.h>
 # include <assert.h>
+# include <errno.h>
 
 /*---------------------GLOBALS------------------------*/
 
@@ -355,6 +356,7 @@ void check_changes(struct user_regs_struct regs_before, struct user_regs_struct 
 }
 
 int main (int argc, char* argv[]) {
+
 	unsigned long start_addr = strtol(argv[1], NULL, 16);
 	unsigned long end_addr = strtol(argv[2], NULL, 16);
 	for (int i=0; i<NUM_REGS; i++) need_to_check_regs[i] = false;
@@ -445,7 +447,8 @@ int main (int argc, char* argv[]) {
 	}
 
 	else if (child_pid == 0) { // child
-	    	if(ptrace(PTRACE_TRACEME, 0, NULL, NULL)<0) {
+	        errno = 0;
+	    	if(ptrace(PTRACE_TRACEME, 0, NULL, NULL) == (-1) && errno != 0) {
 	        	perror("ptrace_traceme");
 	        	exit(1);
 	    	}
@@ -467,25 +470,26 @@ int main (int argc, char* argv[]) {
         	}
 		
 		// set first breakpoint (first time)
+		errno = 0;
 		long data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)start_addr, NULL);
-		if (data<0) {
+		if (data == (-1) && errno != 0) {
 	    		perror("first peektext");
 	    		exit(1);
 		}
 		unsigned long data_trap =(data & 0xFFFFFFFFFFFFFF00)|0xCC;
-		if(ptrace(PTRACE_POKETEXT, child_pid, (void*)start_addr, (void*)data_trap)<0) {
+		if(ptrace(PTRACE_POKETEXT, child_pid, (void*)start_addr, (void*)data_trap) == (-1) && errno != 0) {
 	    		perror("first poketext");
 	    		exit(1);
 		}
 		
 		// continue
-		if(ptrace(PTRACE_CONT, child_pid, NULL, NULL)<0) {
+		if(ptrace(PTRACE_CONT, child_pid, NULL, NULL) == (-1) && errno != 0) {
 	    		perror ("first cont");
 	    		exit(1);
 		}
 		
 		// wait for child to reach first breakpoint
-        	if (wait(&wait_status)<0) {
+        	if (wait(&wait_status) < 0) {
             		perror("first wait");
             		exit(1);
         	}
@@ -493,36 +497,36 @@ int main (int argc, char* argv[]) {
 		while (!WIFEXITED(wait_status)) { // while child didn't finished
 			// REACHED FIRST BREAKPOINT
 			// get regs at the first breakpoint
-			if(ptrace(PTRACE_GETREGS, child_pid, 0, &regs_before)<0) {
+			if(ptrace(PTRACE_GETREGS, child_pid, 0, &regs_before) == (-1) && errno != 0) {
 		    		perror("first getregs");
 		    		exit(1);
 			}
 
 			// remove first breakpoint
-			if(ptrace(PTRACE_POKETEXT, child_pid, (void*)start_addr, (void*)data)<0) {
+			if(ptrace(PTRACE_POKETEXT, child_pid, (void*)start_addr, (void*)data) == (-1) && errno != 0) {
 		    		perror("poketext before removing first breakpoint");
 		    		exit(1);
 			}
 			regs_before.rip -=1;
-			if(ptrace(PTRACE_SETREGS, child_pid, 0, &regs_before)<0) {
+			if(ptrace(PTRACE_SETREGS, child_pid, 0, &regs_before) == (-1) && errno != 0) {
 		    		perror("setregs after removing first breakpoint");
 		    		exit(1);
 			}
 
 			// set second breakpoint
 			data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)end_addr, NULL);
-			if (data<0) {
+			if (data == (-1) && errno != 0) {
 		    		perror("second peektext");
 		    		exit(1);
 			}
 			data_trap = (data & 0xFFFFFFFFFFFFFF00)|0xCC;
-			if(ptrace(PTRACE_POKETEXT, child_pid, (void*)end_addr, (void*)data_trap)<0) {
+			if(ptrace(PTRACE_POKETEXT, child_pid, (void*)end_addr, (void*)data_trap) == (-1) && errno != 0) {
 		    		perror("second poketext");
 		    		exit(1);
 			}
 
 			// continue
-			if(ptrace(PTRACE_CONT, child_pid, NULL, NULL)<0) {
+			if(ptrace(PTRACE_CONT, child_pid, NULL, NULL) == (-1) && errno != 0) {
 		    		perror ("second cont");
 		    		exit(1);
 			}
@@ -537,18 +541,18 @@ int main (int argc, char* argv[]) {
 		
 			// REACHED SECOND BREAKPOINT
 			// get regs after second breakpoint
-			if(ptrace(PTRACE_GETREGS, child_pid, 0, &regs_after)<0) {
+			if(ptrace(PTRACE_GETREGS, child_pid, 0, &regs_after) == (-1) && errno != 0) {
 				    perror("second getregs");
 		    		exit(1);
 			}
 
 			// remove second breakpoint
-			if(ptrace(PTRACE_POKETEXT, child_pid, (void*)end_addr, (void*)data)<0) {
+			if(ptrace(PTRACE_POKETEXT, child_pid, (void*)end_addr, (void*)data) == (-1) && errno != 0) {
 		    		perror("poketext before removing second breakpoint");
 		    		exit(1);
 			}
 			regs_after.rip -=1;
-			if(ptrace(PTRACE_SETREGS, child_pid, 0, &regs_after)<0) {
+			if(ptrace(PTRACE_SETREGS, child_pid, 0, &regs_after) == (-1) && errno != 0) {
 		    		perror("setregs after removing second breakpoint");
 		    		exit(1);
 			}
@@ -558,18 +562,18 @@ int main (int argc, char* argv[]) {
 		
 			// set first breakpoint again
 			long data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)start_addr, NULL);
-			if (data<0) {
+			if (data == (-1) && errno != 0) {
 		    		perror("third peektext");
 		    		exit(1);
 			}
 			unsigned long data_trap =(data & 0xFFFFFFFFFFFFFF00)|0xCC;
-			if(ptrace(PTRACE_POKETEXT, child_pid, (void*)start_addr, (void*)data_trap)<0) {
+			if(ptrace(PTRACE_POKETEXT, child_pid, (void*)start_addr, (void*)data_trap) == (-1) && errno != 0) {
 		    		perror("third poketext");
 		    		exit(1);
 			}
 
 			// continue
-			if(ptrace(PTRACE_CONT, child_pid, NULL, NULL)<0) {
+			if(ptrace(PTRACE_CONT, child_pid, NULL, NULL) == (-1) && errno != 0) {
 		    		perror ("third cont");
 		    		exit(1);
 			}
