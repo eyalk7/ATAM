@@ -365,68 +365,68 @@ int main (int argc, char* argv[]) {
 	scanf("%s%s", var, reg);
 	while (strcmp(var,"run") != 0 && strcmp(reg,"profile") != 0) {
 		if (is_rax(reg)) {
-		    strcpy(var_names[RAX], var);
-		    need_to_check_regs[RAX] = true;
+			strcpy(var_names[RAX], var);
+			need_to_check_regs[RAX] = true;
 		}
 		else if (is_rbx(reg)) {
-	        strcpy(var_names[RBX], var);
-            need_to_check_regs[RBX] = true;
+	        	strcpy(var_names[RBX], var);
+            		need_to_check_regs[RBX] = true;
 		}
 		else if (is_rcx(reg)) {
-            strcpy(var_names[RCX], var);
-            need_to_check_regs[RCX] = true;
+            		strcpy(var_names[RCX], var);
+            		need_to_check_regs[RCX] = true;
 		}
 		else if (is_rdx(reg)) {
-            strcpy(var_names[RDX], var);
-            need_to_check_regs[RDX] = true;
+            		strcpy(var_names[RDX], var);
+            		need_to_check_regs[RDX] = true;
 		}
 		else if (is_rsi(reg)) {
-		    strcpy(var_names[RSI], var);
-		    need_to_check_regs[RSI] = true;
+		    	strcpy(var_names[RSI], var);
+		    	need_to_check_regs[RSI] = true;
 		}
 		else if (is_rdi(reg)) {
-		    strcpy(var_names[RDI], var);
-		    need_to_check_regs[RDI] = true;
+		    	strcpy(var_names[RDI], var);
+		    	need_to_check_regs[RDI] = true;
 		}
 		else if (is_rbp(reg)) {
-		    strcpy(var_names[RBP], var);
-		    need_to_check_regs[RBP] = true;
+		    	strcpy(var_names[RBP], var);
+		    	need_to_check_regs[RBP] = true;
 		}
 		else if (is_rsp(reg)) {
-		    strcpy(var_names[RSP], var);
-		    need_to_check_regs[RSP] = true;
+		    	strcpy(var_names[RSP], var);
+		    	need_to_check_regs[RSP] = true;
 		}
 		else if (is_r8(reg)) {
-		    strcpy(var_names[R8], var);
-		    need_to_check_regs[R8] = true;
+		    	strcpy(var_names[R8], var);
+		    	need_to_check_regs[R8] = true;
 		}
 		else if (is_r9(reg)) {
-		    strcpy(var_names[R9], var);
-		    need_to_check_regs[R9] = true;
+		    	strcpy(var_names[R9], var);
+		    	need_to_check_regs[R9] = true;
 		}
 		else if (is_r10(reg)) {
-		    strcpy(var_names[R10], var);
-		    need_to_check_regs[R10] = true;
+		    	strcpy(var_names[R10], var);
+		    	need_to_check_regs[R10] = true;
 		}
 		else if (is_r11(reg)) {
-		    strcpy(var_names[R11], var);
-		    need_to_check_regs[R11] = true;
+		    	strcpy(var_names[R11], var);
+		    	need_to_check_regs[R11] = true;
 		}
 		else if (is_r12(reg)) {
-		    strcpy(var_names[R12], var);
-		    need_to_check_regs[R12] = true;
+		    	strcpy(var_names[R12], var);
+		    	need_to_check_regs[R12] = true;
 		}
 		else if (is_r13(reg)) {
-		    strcpy(var_names[R13], var);
-		    need_to_check_regs[R13] = true;
+		    	strcpy(var_names[R13], var);
+		    	need_to_check_regs[R13] = true;
 		}
 		else if (is_r14(reg)) {
-		    strcpy(var_names[R14], var);
-		    need_to_check_regs[R14] = true;
+		    	strcpy(var_names[R14], var);
+		    	need_to_check_regs[R14] = true;
 		}
 		else if (is_r15(reg)) {
-		    strcpy(var_names[R15], var);
-		    need_to_check_regs[R15] = true;
+		    	strcpy(var_names[R15], var);
+		    	need_to_check_regs[R15] = true;
 		}
 		else {
 		    assert(false); // not supposed to get here
@@ -440,141 +440,141 @@ int main (int argc, char* argv[]) {
 	child_pid = fork();
 
 	if (child_pid < 0) {
-	    perror("fork");
-	    exit(1);
+	    	perror("fork");
+	    	exit(1);
 	}
 
 	else if (child_pid == 0) { // child
-	    if(ptrace(PTRACE_TRACEME, 0, NULL, NULL)<0) {
-	        perror("ptrace_traceme");
-	        exit(1);
-	    }
+	    	if(ptrace(PTRACE_TRACEME, 0, NULL, NULL)<0) {
+	        	perror("ptrace_traceme");
+	        	exit(1);
+	    	}
 
-	    execv(argv[3], &argv[4]);
+	    	execv(argv[3], &argv[4]);
 
-	    perror("execv"); // not supposed to get here
-	    exit(1);
+	    	perror("execv"); // not supposed to get here
+	    	exit(1);
 	}
 
 	else { // parent process        
-	    int wait_status;
-        struct user_regs_struct regs_before , regs_after;
+	    	int wait_status;
+        	struct user_regs_struct regs_before , regs_after;
 
-        // wait for child to stop after execv
-        if (wait(&wait_status)<0) {
-            perror("first wait");
-            exit(1);
-        }
+        	// wait for child to stop after execv
+        	if (wait(&wait_status)<0) {
+            		perror("first wait");
+            		exit(1);
+        	}
 		
-	// set first breakpoint (first time)
-	long data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)start_addr, NULL);
-	if (data<0) {
-	    perror("first peektext");
-	    exit(1);
-	}
-	unsigned long data_trap =(data & 0xFFFFFFFFFFFFFF00)|0xCC;
-	if(ptrace(PTRACE_POKETEXT, child_pid, (void*)start_addr, (void*)data_trap)<0) {
-	    perror("first poketext");
-	    exit(1);
-	}
-		
-	// continue
-	if(ptrace(PTRACE_CONT, child_pid, NULL, NULL)<0) {
-	    perror ("first cont");
-	    exit(1);
-	}
-	
-	while (!WIFEXITED(wait_status)) { // while child didn't finished
-		// REACHED FIRST BREAKPOINT
-		// get regs at the first breakpoint
-		if(ptrace(PTRACE_GETREGS, child_pid, 0, &regs_before)<0) {
-		    perror("first getregs");
-		    exit(1);
-		}
-
-		// remove first breakpoint
-		if(ptrace(PTRACE_POKETEXT, child_pid, (void*)start_addr, (void*)data)<0) {
-		    perror("poketext before removing first breakpoint");
-		    exit(1);
-		}
-		regs_before.rip -=1;
-		if(ptrace(PTRACE_SETREGS, child_pid, 0, &regs_before)<0) {
-		    perror("setregs after removing first breakpoint");
-		    exit(1);
-		}
-
-		// set second breakpoint
-		data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)end_addr, NULL);
-		if (data<0) {
-		    perror("second peektext");
-		    exit(1);
-		}
-		data_trap = (data & 0xFFFFFFFFFFFFFF00)|0xCC;
-		if(ptrace(PTRACE_POKETEXT, child_pid, (void*)end_addr, (void*)data_trap)<0) {
-		    perror("second poketext");
-		    exit(1);
-		}
-
-		// continue
-		if(ptrace(PTRACE_CONT, child_pid, NULL, NULL)<0) {
-		    perror ("second cont");
-		    exit(1);
-		}
-
-		// wait for child to reach second breakpoint
-		if (wait(&wait_status)<0) {
-		    perror("second wait");
-		    exit(1);
-		}
-		
-		if (WIFEXITED(wait_status)) break; // child finished before reaching second breakpoint
-		
-		// REACHED SECOND BREAKPOINT
-		// get regs after second breakpoint
-		if(ptrace(PTRACE_GETREGS, child_pid, 0, &regs_after)<0) {
-		    perror("second getregs");
-		    exit(1);
-		}
-
-		// remove second breakpoint
-		if(ptrace(PTRACE_POKETEXT, child_pid, (void*)end_addr, (void*)data)<0) {
-		    perror("poketext before removing second breakpoint");
-		    exit(1);
-		}
-		regs_after.rip -=1;
-		if(ptrace(PTRACE_SETREGS, child_pid, 0, &regs_after)<0) {
-		    perror("setregs after removing second breakpoint");
-		    exit(1);
-		}
-		
-		// print changes
-		check_changes(regs_before, regs_after);
-		
-		// set first breakpoint again
+		// set first breakpoint (first time)
 		long data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)start_addr, NULL);
 		if (data<0) {
-		    perror("third peektext");
-		    exit(1);
+	    		perror("first peektext");
+	    		exit(1);
 		}
 		unsigned long data_trap =(data & 0xFFFFFFFFFFFFFF00)|0xCC;
 		if(ptrace(PTRACE_POKETEXT, child_pid, (void*)start_addr, (void*)data_trap)<0) {
-		    perror("third poketext");
-		    exit(1);
+	    		perror("first poketext");
+	    		exit(1);
 		}
-
+		
 		// continue
 		if(ptrace(PTRACE_CONT, child_pid, NULL, NULL)<0) {
-		    perror ("third cont");
-		    exit(1);
+	    		perror ("first cont");
+	    		exit(1);
 		}
+	
+		while (!WIFEXITED(wait_status)) { // while child didn't finished
+			// REACHED FIRST BREAKPOINT
+			// get regs at the first breakpoint
+			if(ptrace(PTRACE_GETREGS, child_pid, 0, &regs_before)<0) {
+		    		perror("first getregs");
+		    		exit(1);
+			}
 
-		// wait for child to reach the first breakpoint again
-		if (wait(&wait_status)<0) {
-		    perror("third wait");
-		    exit(1);
-		}
-	}
+			// remove first breakpoint
+			if(ptrace(PTRACE_POKETEXT, child_pid, (void*)start_addr, (void*)data)<0) {
+		    		perror("poketext before removing first breakpoint");
+		    		exit(1);
+			}
+			regs_before.rip -=1;
+			if(ptrace(PTRACE_SETREGS, child_pid, 0, &regs_before)<0) {
+		    		perror("setregs after removing first breakpoint");
+		    		exit(1);
+			}
+
+			// set second breakpoint
+			data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)end_addr, NULL);
+			if (data<0) {
+		    		perror("second peektext");
+		    		exit(1);
+			}
+			data_trap = (data & 0xFFFFFFFFFFFFFF00)|0xCC;
+			if(ptrace(PTRACE_POKETEXT, child_pid, (void*)end_addr, (void*)data_trap)<0) {
+		    		perror("second poketext");
+		    		exit(1);
+			}
+
+			// continue
+			if(ptrace(PTRACE_CONT, child_pid, NULL, NULL)<0) {
+		    		perror ("second cont");
+		    		exit(1);
+			}
+
+			// wait for child to reach second breakpoint
+			if (wait(&wait_status)<0) {
+		    		perror("second wait");
+		    		exit(1);
+			}
 		
-	// if reached here child finished, so debuger finished also
-	return 0;
+			if (WIFEXITED(wait_status)) break; // child finished before reaching second breakpoint
+		
+			// REACHED SECOND BREAKPOINT
+			// get regs after second breakpoint
+			if(ptrace(PTRACE_GETREGS, child_pid, 0, &regs_after)<0) {
+				    perror("second getregs");
+		    		exit(1);
+			}
+
+			// remove second breakpoint
+			if(ptrace(PTRACE_POKETEXT, child_pid, (void*)end_addr, (void*)data)<0) {
+		    		perror("poketext before removing second breakpoint");
+		    		exit(1);
+			}
+			regs_after.rip -=1;
+			if(ptrace(PTRACE_SETREGS, child_pid, 0, &regs_after)<0) {
+		    		perror("setregs after removing second breakpoint");
+		    		exit(1);
+			}
+		
+			// print changes
+			check_changes(regs_before, regs_after);
+		
+			// set first breakpoint again
+			long data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)start_addr, NULL);
+			if (data<0) {
+		    		perror("third peektext");
+		    		exit(1);
+			}
+			unsigned long data_trap =(data & 0xFFFFFFFFFFFFFF00)|0xCC;
+			if(ptrace(PTRACE_POKETEXT, child_pid, (void*)start_addr, (void*)data_trap)<0) {
+		    		perror("third poketext");
+		    		exit(1);
+			}
+
+			// continue
+			if(ptrace(PTRACE_CONT, child_pid, NULL, NULL)<0) {
+		    		perror ("third cont");
+		    		exit(1);
+			}
+
+			// wait for child to reach the first breakpoint again
+			if (wait(&wait_status)<0) {
+		    		perror("third wait");
+		    		exit(1);
+			}
+		}
+		
+		// if reached here child finished, so debuger (father) finished also
+	}
 }
