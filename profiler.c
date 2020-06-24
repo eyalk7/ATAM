@@ -16,20 +16,10 @@
 # define NUM_REGS 16
 # define RAX 0
 # define RBX 1
-# define RDI 2
-# define RSI 3
-# define RDX 4
-# define RCX 5
-# define RBP 6
-# define RSP 7
-# define R8 8
-# define R9 9
-# define R10 10
-# define R11 11
-# define R12 12
-# define R13 13
-# define R14 14
-# define R15 15
+# define RCX 2
+# define RDX 3
+# define RSI 4
+
 
 bool need_to_check_regs[NUM_REGS];
 char var_names[NUM_REGS][BUF_SIZE];
@@ -68,83 +58,6 @@ bool is_rdx(char reg[]) {
 
 bool is_rsi(char reg[]) {
     if (strcmp(reg,"rsi") == 0 || strcmp(reg,"esi") == 0 || strcmp(reg,"si") == 0 || strcmp(reg,"sil") == 0) {
-        return true;
-    }
-    return false;
-}
-
-bool is_rdi(char reg[]) {
-    if (strcmp(reg,"rdi") == 0 || strcmp(reg,"edi") == 0 || strcmp(reg,"di") == 0 || strcmp(reg,"dil") == 0) {
-        return true;
-    }
-    return false;
-}
-
-bool is_rbp(char reg[]) {
-    if (strcmp(reg,"rbp") == 0 || strcmp(reg,"ebp") == 0 || strcmp(reg,"bp") == 0 || strcmp(reg,"bpl") == 0) {
-        return true;
-    }
-    return false;
-}
-
-bool is_rsp(char reg[]) {
-    if (strcmp(reg,"rsp") == 0 || strcmp(reg,"esp") == 0 || strcmp(reg,"sp") == 0 || strcmp(reg,"spl") == 0) {
-        return true;
-    }
-    return false;
-}
-
-bool is_r8(char reg[]) {
-    if (strcmp(reg,"r8") == 0 || strcmp(reg,"r8d") == 0 || strcmp(reg,"r8b") == 0 || strcmp(reg,"r8w") == 0) {
-        return true;
-    }
-    return false;
-}
-
-bool is_r9(char reg[]) {
-    if (strcmp(reg,"r9") == 0 || strcmp(reg,"r9d") == 0 || strcmp(reg,"r9b") == 0 || strcmp(reg,"r9w") == 0) {
-        return true;
-    }
-    return false;
-}
-
-bool is_r10(char reg[]) {
-    if (strcmp(reg,"r10") == 0 || strcmp(reg,"r10d") == 0 || strcmp(reg,"r10b") == 0 || strcmp(reg,"r10w") == 0) {
-        return true;
-    }
-    return false;
-}
-
-bool is_r11(char reg[]) {
-    if (strcmp(reg,"r11") == 0 || strcmp(reg,"r11d") == 0 || strcmp(reg,"r11b") == 0 || strcmp(reg,"r11w") == 0) {
-        return true;
-    }
-    return false;
-}
-
-bool is_r12(char reg[]) {
-    if (strcmp(reg,"r12") == 0 || strcmp(reg,"r12d") == 0 || strcmp(reg,"r12b") == 0 || strcmp(reg,"r12w") == 0) {
-        return true;
-    }
-    return false;
-}
-
-bool is_r13(char reg[]) {
-    if (strcmp(reg,"r13") == 0 || strcmp(reg,"r13d") == 0 || strcmp(reg,"r13b") == 0 || strcmp(reg,"r13w") == 0) {
-        return true;
-    }
-    return false;
-}
-
-bool is_r14(char reg[]) {
-    if (strcmp(reg,"r14") == 0 || strcmp(reg,"r14d") == 0 || strcmp(reg,"r14b") == 0 || strcmp(reg,"r14w") == 0) {
-        return true;
-    }
-    return false;
-}
-
-bool is_r15(char reg[]) {
-    if (strcmp(reg,"r15") == 0 || strcmp(reg,"r15d") == 0 || strcmp(reg,"r15b") == 0 || strcmp(reg,"r15w") == 0) {
         return true;
     }
     return false;
@@ -212,127 +125,6 @@ void check_changes(struct user_regs_struct regs_before, struct user_regs_struct 
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[RDI] && regs_before.rdi != regs_after.rdi) {
-        strcpy(toPrint[counter],"PRF:: ");
-        strcat(toPrint[counter], var_names[RDI]);
-        strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", regs_before.rdi);
-        strcat(toPrint[counter], tempBuf);
-        strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", regs_after.rdi);
-        strcat(toPrint[counter], tempBuf);
-        counter++;
-    }
-    if (need_to_check_regs[RBP] && regs_before.rbp != regs_after.rbp) {
-        strcpy(toPrint[counter],"PRF:: ");
-        strcat(toPrint[counter], var_names[RBP]);
-        strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", regs_before.rbp);
-        strcat(toPrint[counter], tempBuf);
-        strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", regs_after.rbp);
-        strcat(toPrint[counter], tempBuf);
-        counter++;
-    }
-    if (need_to_check_regs[RSP] && regs_before.rsp != regs_after.rsp) {
-        strcpy(toPrint[counter],"PRF:: ");
-        strcat(toPrint[counter], var_names[RSP]);
-        strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", regs_before.rsp);
-        strcat(toPrint[counter], tempBuf);
-        strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", regs_after.rsp);
-        strcat(toPrint[counter], tempBuf);
-        counter++;
-    }
-    if (need_to_check_regs[R8] && regs_before.r8 != regs_after.r8) {
-        strcpy(toPrint[counter],"PRF:: ");
-        strcat(toPrint[counter], var_names[R8]);
-        strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", regs_before.r8);
-        strcat(toPrint[counter], tempBuf);
-        strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", regs_after.r8);
-        strcat(toPrint[counter], tempBuf);
-        counter++;
-    }
-    if (need_to_check_regs[R9] && regs_before.r9 != regs_after.r9) {
-        strcpy(toPrint[counter],"PRF:: ");
-        strcat(toPrint[counter], var_names[R9]);
-        strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", regs_before.r9);
-        strcat(toPrint[counter], tempBuf);
-        strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", regs_after.r9);
-        strcat(toPrint[counter], tempBuf);
-        counter++;
-    }
-    if (need_to_check_regs[R10] && regs_before.r10 != regs_after.r10) {
-        strcpy(toPrint[counter],"PRF:: ");
-        strcat(toPrint[counter], var_names[R10]);
-        strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", regs_before.r10);
-        strcat(toPrint[counter], tempBuf);
-        strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", regs_after.r10);
-        strcat(toPrint[counter], tempBuf);
-        counter++;
-    }
-    if (need_to_check_regs[R11] && regs_before.r11 != regs_after.r11) {
-        strcpy(toPrint[counter],"PRF:: ");
-        strcat(toPrint[counter], var_names[R11]);
-        strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", regs_before.r11);
-        strcat(toPrint[counter], tempBuf);
-        strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", regs_after.r11);
-        strcat(toPrint[counter], tempBuf);
-        counter++;
-    }
-    if (need_to_check_regs[R12] && regs_before.r12 != regs_after.r12) {
-        strcpy(toPrint[counter],"PRF:: ");
-        strcat(toPrint[counter], var_names[R12]);
-        strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", regs_before.r12);
-        strcat(toPrint[counter], tempBuf);
-        strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", regs_after.r12);
-        strcat(toPrint[counter], tempBuf);
-        counter++;
-    }
-    if (need_to_check_regs[R13] && regs_before.r13 != regs_after.r13) {
-        strcpy(toPrint[counter],"PRF:: ");
-        strcat(toPrint[counter], var_names[R13]);
-        strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", regs_before.r13);
-        strcat(toPrint[counter], tempBuf);
-        strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", regs_after.r13);
-        strcat(toPrint[counter], tempBuf);
-        counter++;
-    }
-    if (need_to_check_regs[R14] && regs_before.r14 != regs_after.r14) {
-        strcpy(toPrint[counter],"PRF:: ");
-        strcat(toPrint[counter], var_names[R14]);
-        strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", regs_before.r14);
-        strcat(toPrint[counter], tempBuf);
-        strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", regs_after.r14);
-        strcat(toPrint[counter], tempBuf);
-        counter++;
-    }
-    if (need_to_check_regs[R15] && regs_before.r15 != regs_after.r15) {
-        strcpy(toPrint[counter],"PRF:: ");
-        strcat(toPrint[counter], var_names[R15]);
-        strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", regs_before.r15);
-        strcat(toPrint[counter], tempBuf);
-        strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", regs_after.r15);
-        strcat(toPrint[counter], tempBuf);
-        counter++;
-    }
 
     // sort
     int swapped=1;
@@ -385,50 +177,6 @@ int main (int argc, char* argv[]) {
 		else if (is_rsi(reg)) {
 		    	strcpy(var_names[RSI], var);
 		    	need_to_check_regs[RSI] = true;
-		}
-		else if (is_rdi(reg)) {
-		    	strcpy(var_names[RDI], var);
-		    	need_to_check_regs[RDI] = true;
-		}
-		else if (is_rbp(reg)) {
-		    	strcpy(var_names[RBP], var);
-		    	need_to_check_regs[RBP] = true;
-		}
-		else if (is_rsp(reg)) {
-		    	strcpy(var_names[RSP], var);
-		    	need_to_check_regs[RSP] = true;
-		}
-		else if (is_r8(reg)) {
-		    	strcpy(var_names[R8], var);
-		    	need_to_check_regs[R8] = true;
-		}
-		else if (is_r9(reg)) {
-		    	strcpy(var_names[R9], var);
-		    	need_to_check_regs[R9] = true;
-		}
-		else if (is_r10(reg)) {
-		    	strcpy(var_names[R10], var);
-		    	need_to_check_regs[R10] = true;
-		}
-		else if (is_r11(reg)) {
-		    	strcpy(var_names[R11], var);
-		    	need_to_check_regs[R11] = true;
-		}
-		else if (is_r12(reg)) {
-		    	strcpy(var_names[R12], var);
-		    	need_to_check_regs[R12] = true;
-		}
-		else if (is_r13(reg)) {
-		    	strcpy(var_names[R13], var);
-		    	need_to_check_regs[R13] = true;
-		}
-		else if (is_r14(reg)) {
-		    	strcpy(var_names[R14], var);
-		    	need_to_check_regs[R14] = true;
-		}
-		else if (is_r15(reg)) {
-		    	strcpy(var_names[R15], var);
-		    	need_to_check_regs[R15] = true;
 		}
 		else {
 		    assert(false); // not supposed to get here
