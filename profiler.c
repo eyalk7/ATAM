@@ -288,6 +288,12 @@ int main (int argc, char* argv[]) {
 			if (WIFEXITED(wait_status)) break; // child finished before reaching second breakpoint
 		
 			// REACHED SECOND BREAKPOINT
+			// get regs at second breakpoint
+			if(ptrace(PTRACE_GETREGS, child_pid, 0, &regs_after) == (-1) && errno != 0) {
+				perror("getregs at breakpoint");
+		    		exit(1);
+			}
+			
 			// remove second breakpoint
 			if(ptrace(PTRACE_POKETEXT, child_pid, (void*)end_addr, (void*)data) == (-1) && errno != 0) {
 		    		perror("poketext before removing second breakpoint");
