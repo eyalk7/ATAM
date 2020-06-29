@@ -233,47 +233,47 @@ void check_changes(struct user_regs_struct regs_before, struct user_regs_struct 
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[EAX] && (regs_before.rax & 0xFFFFFFFF) != (regs_after.rax & 0xFFFFFFFF)) {
+    if (need_to_check_regs[EAX] && (regs_before.rax & 0xffffffff) != (regs_after.rax & 0xffffffff)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[EAX]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rax & 0xFFFFFFFF));
+        sprintf(tempBuf, "%lld", (regs_before.rax & 0xffffffff));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rax & 0xFFFFFFFF));
+        sprintf(tempBuf, "%lld", (regs_after.rax & 0xffffffff));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[AX] && (regs_before.rax & 0xFFFF) != (regs_after.rax & 0xFFFF)) {
+    if (need_to_check_regs[AX] && (regs_before.rax & 0xffff) != (regs_after.rax & 0xffff)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[AX]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rax & 0xFFFF));
+        sprintf(tempBuf, "%lld", (regs_before.rax & 0xffff));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rax & 0xFFFF));
+        sprintf(tempBuf, "%lld", (regs_after.rax & 0xffff));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[AH] && (regs_before.rax & 0xFF00) != (regs_after.rax & 0xFF00)) {
+    if (need_to_check_regs[AH] && (regs_before.rax & 0xff00) != (regs_after.rax & 0xff00)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[AH]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rax & 0xFF00));
+        sprintf(tempBuf, "%lld", (regs_before.rax & 0xff00));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rax & 0xFF00));
+        sprintf(tempBuf, "%lld", (regs_after.rax & 0xff00));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[AL] && (regs_before.rax & 0xFF) != (regs_after.rax & 0xFF)) {
+    if (need_to_check_regs[AL] && (regs_before.rax & 0xff) != (regs_after.rax & 0xff)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[AL]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rax & 0xFF));
+        sprintf(tempBuf, "%lld", (regs_before.rax & 0xff));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rax & 0xFF));
+        sprintf(tempBuf, "%lld", (regs_after.rax & 0xff));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
@@ -288,47 +288,47 @@ void check_changes(struct user_regs_struct regs_before, struct user_regs_struct 
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[EBX] && (regs_before.rbx & 0xFFFFFFFF) != (regs_after.rbx & 0xFFFFFFFF)) {
+    if (need_to_check_regs[EBX] && (regs_before.rbx & 0xffffffff) != (regs_after.rbx & 0xffffffff)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[EBX]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rbx & 0xFFFFFFFF));
+        sprintf(tempBuf, "%lld", (regs_before.rbx & 0xffffffff));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rbx & 0xFFFFFFFF));
+        sprintf(tempBuf, "%lld", (regs_after.rbx & 0xffffffff));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[BX] && (regs_before.rbx & 0xFFFF) != (regs_after.rbx & 0xFFFF)) {
+    if (need_to_check_regs[BX] && (regs_before.rbx & 0xffff) != (regs_after.rbx & 0xffff)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[BX]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rbx & 0xFFFF));
+        sprintf(tempBuf, "%lld", (regs_before.rbx & 0xffff));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rbx & 0xFFFF));
+        sprintf(tempBuf, "%lld", (regs_after.rbx & 0xffff));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[BH] && (regs_before.rbx & 0xFF00) != (regs_after.rbx & 0xFF00)) {
+    if (need_to_check_regs[BH] && (regs_before.rbx & 0xff00) != (regs_after.rbx & 0xff00)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[BH]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rbx & 0xFF00));
+        sprintf(tempBuf, "%lld", (regs_before.rbx & 0xff00));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rbx & 0xFF00));
+        sprintf(tempBuf, "%lld", (regs_after.rbx & 0xff00));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[BL] && (regs_before.rbx & 0xFF) != (regs_after.rbx & 0xFF)) {
+    if (need_to_check_regs[BL] && (regs_before.rbx & 0xff) != (regs_after.rbx & 0xff)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[BL]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rbx & 0xFF));
+        sprintf(tempBuf, "%lld", (regs_before.rbx & 0xff));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rbx & 0xFF));
+        sprintf(tempBuf, "%lld", (regs_after.rbx & 0xff));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
@@ -343,47 +343,47 @@ void check_changes(struct user_regs_struct regs_before, struct user_regs_struct 
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[ECX] && (regs_before.rcx & 0xFFFFFFFF) != (regs_after.rcx & 0xFFFFFFFF)) {
+    if (need_to_check_regs[ECX] && (regs_before.rcx & 0xffffffff) != (regs_after.rcx & 0xffffffff)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[ECX]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rcx & 0xFFFFFFFF));
+        sprintf(tempBuf, "%lld", (regs_before.rcx & 0xffffffff));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rcx & 0xFFFFFFFF));
+        sprintf(tempBuf, "%lld", (regs_after.rcx & 0xffffffff));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[CX] && (regs_before.rcx & 0xFFFF) != (regs_after.rcx & 0xFFFF)) {
+    if (need_to_check_regs[CX] && (regs_before.rcx & 0xffff) != (regs_after.rcx & 0xffff)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[CX]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rcx & 0xFFFF));
+        sprintf(tempBuf, "%lld", (regs_before.rcx & 0xffff));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rcx & 0xFFFF));
+        sprintf(tempBuf, "%lld", (regs_after.rcx & 0xffff));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[CH] && (regs_before.rcx & 0xFF00) != (regs_after.rcx & 0xFF00)) {
+    if (need_to_check_regs[CH] && (regs_before.rcx & 0xff00) != (regs_after.rcx & 0xff00)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[CH]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rcx & 0xFF00));
+        sprintf(tempBuf, "%lld", (regs_before.rcx & 0xff00));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rcx & 0xFF00));
+        sprintf(tempBuf, "%lld", (regs_after.rcx & 0xff00));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[CL] && (regs_before.rcx & 0xFF) != (regs_after.rcx & 0xFF)) {
+    if (need_to_check_regs[CL] && (regs_before.rcx & 0xff) != (regs_after.rcx & 0xff)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[CL]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rcx & 0xFF));
+        sprintf(tempBuf, "%lld", (regs_before.rcx & 0xff));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rcx & 0xFF));
+        sprintf(tempBuf, "%lld", (regs_after.rcx & 0xff));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
@@ -398,47 +398,47 @@ void check_changes(struct user_regs_struct regs_before, struct user_regs_struct 
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[EDX] && (regs_before.rdx & 0xFFFFFFFF) != (regs_after.rdx & 0xFFFFFFFF)) {
+    if (need_to_check_regs[EDX] && (regs_before.rdx & 0xffffffff) != (regs_after.rdx & 0xffffffff)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[EDX]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rdx & 0xFFFFFFFF));
+        sprintf(tempBuf, "%lld", (regs_before.rdx & 0xffffffff));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rdx & 0xFFFFFFFF));
+        sprintf(tempBuf, "%lld", (regs_after.rdx & 0xffffffff));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[DX] && (regs_before.rdx & 0xFFFF) != (regs_after.rdx & 0xFFFF)) {
+    if (need_to_check_regs[DX] && (regs_before.rdx & 0xffff) != (regs_after.rdx & 0xffff)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[DX]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rdx & 0xFFFF));
+        sprintf(tempBuf, "%lld", (regs_before.rdx & 0xffff));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rdx & 0xFFFF));
+        sprintf(tempBuf, "%lld", (regs_after.rdx & 0xffff));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[DH] && (regs_before.rdx & 0xFF00) != (regs_after.rdx & 0xFF00)) {
+    if (need_to_check_regs[DH] && (regs_before.rdx & 0xff00) != (regs_after.rdx & 0xff00)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[DH]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rdx & 0xFF00));
+        sprintf(tempBuf, "%lld", (regs_before.rdx & 0xff00));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rdx & 0xFF00));
+        sprintf(tempBuf, "%lld", (regs_after.rdx & 0xff00));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[DL] && (regs_before.rdx & 0xFF) != (regs_after.rdx & 0xFF)) {
+    if (need_to_check_regs[DL] && (regs_before.rdx & 0xff) != (regs_after.rdx & 0xff)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[DL]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rdx & 0xFF));
+        sprintf(tempBuf, "%lld", (regs_before.rdx & 0xff));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rdx & 0xFF));
+        sprintf(tempBuf, "%lld", (regs_after.rdx & 0xff));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
@@ -453,36 +453,36 @@ void check_changes(struct user_regs_struct regs_before, struct user_regs_struct 
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[ESI] && (regs_before.rsi & 0xFFFFFFFF) != (regs_after.rsi & 0xFFFFFFFF)) {
+    if (need_to_check_regs[ESI] && (regs_before.rsi & 0xffffffff) != (regs_after.rsi & 0xffffffff)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[ESI]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rsi & 0xFFFFFFFF));
+        sprintf(tempBuf, "%lld", (regs_before.rsi & 0xffffffff));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rsi & 0xFFFFFFFF));
+        sprintf(tempBuf, "%lld", (regs_after.rsi & 0xffffffff));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[SI] && (regs_before.rsi & 0xFFFF) != (regs_after.rsi & 0xFFFF)) {
+    if (need_to_check_regs[SI] && (regs_before.rsi & 0xffff) != (regs_after.rsi & 0xffff)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[SI]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rsi & 0xFFFF));
+        sprintf(tempBuf, "%lld", (regs_before.rsi & 0xffff));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rsi & 0xFFFF));
+        sprintf(tempBuf, "%lld", (regs_after.rsi & 0xffff));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
-    if (need_to_check_regs[SIL] && (regs_before.rsi & 0xFF) != (regs_after.rsi & 0xFF)) {
+    if (need_to_check_regs[SIL] && (regs_before.rsi & 0xff) != (regs_after.rsi & 0xff)) {
         strcpy(toPrint[counter],"PRF:: ");
         strcat(toPrint[counter], var_names[SIL]);
         strcat(toPrint[counter], ": ");
-        sprintf(tempBuf, "%lld", (regs_before.rsi & 0xFF));
+        sprintf(tempBuf, "%lld", (regs_before.rsi & 0xff));
         strcat(toPrint[counter], tempBuf);
         strcat(toPrint[counter], "->");
-        sprintf(tempBuf, "%lld", (regs_after.rsi & 0xFF));
+        sprintf(tempBuf, "%lld", (regs_after.rsi & 0xff));
         strcat(toPrint[counter], tempBuf);
         counter++;
     }
