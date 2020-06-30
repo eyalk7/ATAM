@@ -511,8 +511,8 @@ void check_changes(struct user_regs_struct regs_before, struct user_regs_struct 
 
 int main (int argc, char* argv[]) {
 
-	unsigned long start_addr = strtol(argv[1], NULL, 16);
-	unsigned long end_addr = strtol(argv[2], NULL, 16);
+	unsigned long long start_addr = strtol(argv[1], NULL, 16);
+	unsigned long long end_addr = strtol(argv[2], NULL, 16);
 	for (int i=0; i<NUM_REGS; i++) need_to_check_regs[i] = false;
 
 	// get vars from user
@@ -637,7 +637,7 @@ int main (int argc, char* argv[]) {
 	    	    exit(1);
 	    	}
 
-	    	execv(argv[3], &argv[4]);
+	    	execv(argv[3], argv+3);
 
 	    	// not supposed to get here
 	    	exit(1);
@@ -654,11 +654,11 @@ int main (int argc, char* argv[]) {
 		
 		// set first breakpoint (first time)
 		errno = 0;
-		long data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)start_addr, NULL);
+		long long data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)start_addr, NULL);
 		if (data == (-1) && errno != 0) {
 		    exit(1);
 		}
-		unsigned long data_trap =(data & 0xFFFFFFFFFFFFFF00)|0xCC;
+		unsigned long long data_trap =(data & 0xFFFFFFFFFFFFFF00)|0xCC;
 		if(ptrace(PTRACE_POKETEXT, child_pid, (void*)start_addr, (void*)data_trap) == (-1) && errno != 0) {
 		    exit(1);
 		}
