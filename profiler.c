@@ -514,8 +514,8 @@ void check_changes(struct user_regs_struct regs_before, struct user_regs_struct 
 
     // print
     for (int j=0; j<NUM_REGS; j++) {
-	if (need_to_print[to_sort[j][1]]) {
-        	printf("%s\n", toPrint[to_sort[j][1]]);
+	if (need_to_print[(int)to_sort[j][1]]) {
+        	printf("%s\n", toPrint[(int)to_sort[j][1]]);
 	}
     }
 }
@@ -636,7 +636,7 @@ int main (int argc, char* argv[]) {
 
 	// sort vars
 	for (int i=0; i<NUM_REGS; i++) {
-		to_sort[i][1] = i;
+		to_sort[i][1][0] = i;
 		if (need_to_check_regs[i]) {
 			strcpy(to_sort[i][0], var_names[i]);
 		}
@@ -652,9 +652,9 @@ int main (int argc, char* argv[]) {
                 		strcpy(temp, to_sort[i][0]);
                 		strcpy(to_sort[i][0], to_sort[i-1][0]);
                 		strcpy(to_sort[i-1][0], temp);
-				temp_num = to_sort[i][1];
-				to_sort[i][1] = to_sort[i-1][1];
-				to_sort[i-1][1] = temp_num;
+				temp_num = to_sort[i][1][0];
+				to_sort[i][1][0] = to_sort[i-1][1][0];
+				to_sort[i-1][1][0] = temp_num;
                 		swapped=1;
         	    	}
         	}
