@@ -514,8 +514,8 @@ void check_changes(struct user_regs_struct regs_before, struct user_regs_struct 
 
     // print
     for (int j=0; j<NUM_REGS; j++) {
-	if (need_to_print[(int)to_sort[j][1]]) {
-        	printf("%s\n", toPrint[(int)to_sort[j][1]]);
+	if (need_to_print[(int)to_sort[j][1][0]]) {
+        	printf("%s\n", toPrint[(int)to_sort[j][1][0]]);
 	}
     }
 }
